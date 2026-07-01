@@ -1,0 +1,33 @@
+import streamlit as st
+import joblib
+
+model = joblib.load("inventory_model.pkl")
+encoder = joblib.load("product_encoder.pkl")
+
+product = st.selectbox(
+    "Product",
+    encoder.classes_
+)
+
+year = st.number_input("Year",2026)
+
+month = st.selectbox(
+    "Month",
+    list(range(1,13))
+)
+
+if st.button("Predict"):
+
+    pid = encoder.transform([product])[0]
+
+    X = [[
+        pid,
+        year,
+        month
+    ]]
+
+    pred = model.predict(X)
+
+    st.success(
+        f"Required Inventory : {round(pred[0])}"
+    )
