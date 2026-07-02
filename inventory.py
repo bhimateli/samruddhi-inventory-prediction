@@ -20,7 +20,7 @@ st.set_page_config(
 
 BASE_DIR = Path(__file__).parent
 
-model = joblib.load(BASE_DIR / "inventory_model.pkl")
+model = joblib.load(BASE_DIR / "inventory_model_cat.pkl")
 encoder = joblib.load(BASE_DIR / "product_encoder.pkl")
 monthly = pd.read_excel(BASE_DIR / "Monthly_Product_Sales.xlsx")
 
